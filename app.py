@@ -54,7 +54,7 @@ app = FastAPI(
 # Add CORS middleware
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=["http://resnet501k.classifier.localhost"],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -210,6 +210,7 @@ async def ui_home():
 @app.post("/classify", response_class=HTMLResponse)
 async def ui_handle_classify(file: Annotated[bytes, File()]):
     try:
+        print("Classifying image... button clicked ")
         response = await predict(file)
         image_b64 = base64.b64encode(file).decode("utf-8")
 

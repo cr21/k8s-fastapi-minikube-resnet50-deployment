@@ -101,3 +101,84 @@ kubectl delete -f resnet50-classifier-deployment.yaml
 
 kubectl delete service resnet50-1k-classifier-service
 
+# INGRESS
+
+minikube addons list
+
+minikube addons enable ingress
+
+❯ minikube addons enable ingress
+💡  ingress is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+💡  After the addon is enabled, please run "minikube tunnel" and your ingress resources would be available at "127.0.0.1"
+    ▪ Using image registry.k8s.io/ingress-nginx/controller:v1.11.2
+    ▪ Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.4.3
+    ▪ Using image registry.k8s.io/ingress-nginx/kube-webhook-certgen:v1.4.3
+🔎  Verifying ingress addon...
+🌟  The 'ingress' addon is enabled
+
+minikube addons enable dashboard
+
+❯ minikube addons enable dashboard
+💡  dashboard is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+    ▪ Using image docker.io/kubernetesui/dashboard:v2.7.0
+    ▪ Using image docker.io/kubernetesui/metrics-scraper:v1.0.8
+💡  Some dashboard features require the metrics-server addon. To enable all features please run:
+
+        minikube addons enable metrics-server
+
+🌟  The 'dashboard' addon is enabled
+
+minikube addons enable metrics-server
+❯   minikube addons enable metrics-server
+💡  metrics-server is an addon maintained by Kubernetes. For any concerns contact minikube on GitHub.
+You can view the list of minikube maintainers at: https://github.com/kubernetes/minikube/blob/master/OWNERS
+    ▪ Using image registry.k8s.io/metrics-server/metrics-server:v0.7.2
+🌟  The 'metrics-server' addon is enabled
+
+resnet-k8s                                           latest     2e25ab135a80   28 minutes ago   983MB
+registry.k8s.io/metrics-server/metrics-server        <none>     48d9cfaaf390   4 months ago     67.1MB
+registry.k8s.io/ingress-nginx/controller             <none>     a80c8fd6e522   4 months ago     287MB
+registry.k8s.io/ingress-nginx/kube-webhook-certgen   <none>     ce263a8653f9   4 months ago     54.7MB
+
+
+## with ingress
+kubectl apply -f resnet50-classifier-deployment.yaml
+
+❯ kubectl get pods
+NAME                                                 READY   STATUS    RESTARTS   AGE
+resnet50-1k-classifier-deployment-5cd5cf566c-dc7hq   1/1     Running   0          20s
+resnet50-1k-classifier-deployment-5cd5cf566c-f2slj   1/1     Running   0          20s
+
+
+❯ kubectl get services
+NAME                             TYPE        CLUSTER-IP    EXTERNAL-IP   PORT(S)   AGE
+kubernetes                       ClusterIP   10.96.0.1     <none>        443/TCP   32h
+resnet50-1k-classifier-service   ClusterIP   10.105.34.9   <none>        80/TCP    38s
+
+#Expose the Service using MiniKube Service Proxy
+
+minikube service resnet50-1k-classifier-service
+
+
+
+❯ minikube service resnet50-1k-classifier-service
+|-----------|--------------------------------|-------------|--------------|
+| NAMESPACE |              NAME              | TARGET PORT |     URL      |
+|-----------|--------------------------------|-------------|--------------|
+| default   | resnet50-1k-classifier-service |             | No node port |
+|-----------|--------------------------------|-------------|--------------|
+😿  service default/resnet50-1k-classifier-service has no node port
+❗  Services [default/resnet50-1k-classifier-service] have type "ClusterIP" not meant to be exposed, however for local development minikube allows you to access this !
+🏃  Starting tunnel for service resnet50-1k-classifier-service.
+|-----------|--------------------------------|-------------|------------------------|
+| NAMESPACE |              NAME              | TARGET PORT |          URL           |
+|-----------|--------------------------------|-------------|------------------------|
+| default   | resnet50-1k-classifier-service |             | http://127.0.0.1:57808 |
+|-----------|--------------------------------|-------------|------------------------|
+🎉  Opening service default/resnet50-1k-classifier-service in default browser...
+❗  Because you are using a Docker driver on darwin, the terminal needs to be open to run it.
+
+
+minikube tunnel
