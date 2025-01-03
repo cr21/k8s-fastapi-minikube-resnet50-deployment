@@ -1,0 +1,22 @@
+Name:             resnet50-1k-classifier-ingress
+Labels:           <none>
+Namespace:        default
+Address:          192.168.49.2
+Ingress Class:    nginx
+Default backend:  <default>
+Rules:
+  Host                             Path  Backends
+  ----                             ----  --------
+  resnet501k.classifier.localhost  
+                                   /   resnet50-1k-classifier-service:80 (10.244.0.56:7860,10.244.0.53:7860)
+Annotations:                       nginx.ingress.kubernetes.io/affinity: cookie
+                                   nginx.ingress.kubernetes.io/affinity-mode: balanced
+                                   nginx.ingress.kubernetes.io/proxy-body-size: 10m
+                                   nginx.ingress.kubernetes.io/session-cookie-expires: 172800
+                                   nginx.ingress.kubernetes.io/session-cookie-max-age: 172800
+                                   nginx.ingress.kubernetes.io/session-cookie-name: INGRESSCOOKIE
+Events:
+  Type    Reason  Age                From                      Message
+  ----    ------  ----               ----                      -------
+  Normal  Sync    35m (x2 over 35m)  nginx-ingress-controller  Scheduled for sync
+  Normal  Sync    30m (x3 over 31m)  nginx-ingress-controller  Scheduled for sync
