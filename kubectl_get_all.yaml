@@ -1,0 +1,441 @@
+apiVersion: v1
+items:
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2025-01-03T08:16:39Z"
+    generateName: resnet50-1k-classifier-deployment-5cd5cf566c-
+    labels:
+      app: resnet50-1k-classifier
+      pod-template-hash: 5cd5cf566c
+    name: resnet50-1k-classifier-deployment-5cd5cf566c-69krf
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: resnet50-1k-classifier-deployment-5cd5cf566c
+      uid: 364080a5-d479-4ae8-aff7-7abf8d5fbf5e
+    resourceVersion: "33534"
+    uid: e52ea2cc-3819-4192-83d3-54fd1e3ed17c
+  spec:
+    containers:
+    - image: resnet-k8s:latest
+      imagePullPolicy: Never
+      name: resnet50-1k-classifier
+      ports:
+      - containerPort: 7860
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-bjb78
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: minikube
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-bjb78
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2025-01-03T08:19:20Z"
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2025-01-03T08:16:39Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2025-01-03T08:19:20Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2025-01-03T08:19:20Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2025-01-03T08:16:39Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://68bbcfe5f9c9f15aa2f129fa981819fbbde77aaeaf0f2d47eb9acef16923c1c1
+      image: resnet-k8s:latest
+      imageID: docker://sha256:cba9e880eeb435622b88c788851261a20d563216a06b92afa2adaee97ab7c007
+      lastState:
+        terminated:
+          containerID: docker://d4c0f38e73d684e5d8d85caedd9795ba52a604bd7f8fc330817ee79001b7ea18
+          exitCode: 0
+          finishedAt: "2025-01-03T08:19:03Z"
+          reason: Completed
+          startedAt: "2025-01-03T08:16:40Z"
+      name: resnet50-1k-classifier
+      ready: true
+      restartCount: 1
+      started: true
+      state:
+        running:
+          startedAt: "2025-01-03T08:19:18Z"
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-bjb78
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 192.168.49.2
+    hostIPs:
+    - ip: 192.168.49.2
+    phase: Running
+    podIP: 10.244.0.56
+    podIPs:
+    - ip: 10.244.0.56
+    qosClass: BestEffort
+    startTime: "2025-01-03T08:16:39Z"
+- apiVersion: v1
+  kind: Pod
+  metadata:
+    creationTimestamp: "2025-01-03T08:16:39Z"
+    generateName: resnet50-1k-classifier-deployment-5cd5cf566c-
+    labels:
+      app: resnet50-1k-classifier
+      pod-template-hash: 5cd5cf566c
+    name: resnet50-1k-classifier-deployment-5cd5cf566c-klglg
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: ReplicaSet
+      name: resnet50-1k-classifier-deployment-5cd5cf566c
+      uid: 364080a5-d479-4ae8-aff7-7abf8d5fbf5e
+    resourceVersion: "33530"
+    uid: acca5b49-2e6b-4dac-9d2a-e3afea423d2e
+  spec:
+    containers:
+    - image: resnet-k8s:latest
+      imagePullPolicy: Never
+      name: resnet50-1k-classifier
+      ports:
+      - containerPort: 7860
+        protocol: TCP
+      resources: {}
+      terminationMessagePath: /dev/termination-log
+      terminationMessagePolicy: File
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-pqpjv
+        readOnly: true
+    dnsPolicy: ClusterFirst
+    enableServiceLinks: true
+    nodeName: minikube
+    preemptionPolicy: PreemptLowerPriority
+    priority: 0
+    restartPolicy: Always
+    schedulerName: default-scheduler
+    securityContext: {}
+    serviceAccount: default
+    serviceAccountName: default
+    terminationGracePeriodSeconds: 30
+    tolerations:
+    - effect: NoExecute
+      key: node.kubernetes.io/not-ready
+      operator: Exists
+      tolerationSeconds: 300
+    - effect: NoExecute
+      key: node.kubernetes.io/unreachable
+      operator: Exists
+      tolerationSeconds: 300
+    volumes:
+    - name: kube-api-access-pqpjv
+      projected:
+        defaultMode: 420
+        sources:
+        - serviceAccountToken:
+            expirationSeconds: 3607
+            path: token
+        - configMap:
+            items:
+            - key: ca.crt
+              path: ca.crt
+            name: kube-root-ca.crt
+        - downwardAPI:
+            items:
+            - fieldRef:
+                apiVersion: v1
+                fieldPath: metadata.namespace
+              path: namespace
+  status:
+    conditions:
+    - lastProbeTime: null
+      lastTransitionTime: "2025-01-03T08:19:20Z"
+      status: "True"
+      type: PodReadyToStartContainers
+    - lastProbeTime: null
+      lastTransitionTime: "2025-01-03T08:16:39Z"
+      status: "True"
+      type: Initialized
+    - lastProbeTime: null
+      lastTransitionTime: "2025-01-03T08:19:20Z"
+      status: "True"
+      type: Ready
+    - lastProbeTime: null
+      lastTransitionTime: "2025-01-03T08:19:20Z"
+      status: "True"
+      type: ContainersReady
+    - lastProbeTime: null
+      lastTransitionTime: "2025-01-03T08:16:39Z"
+      status: "True"
+      type: PodScheduled
+    containerStatuses:
+    - containerID: docker://6cbf40c82a9095d50f9cba57f57a50784f3d67290bee83216e10041a8619b32d
+      image: resnet-k8s:latest
+      imageID: docker://sha256:cba9e880eeb435622b88c788851261a20d563216a06b92afa2adaee97ab7c007
+      lastState:
+        terminated:
+          containerID: docker://229625a3ba324d6928013e8a9158cd19089a9c5256e03371abc5244ea652c9db
+          exitCode: 0
+          finishedAt: "2025-01-03T08:19:03Z"
+          reason: Completed
+          startedAt: "2025-01-03T08:16:40Z"
+      name: resnet50-1k-classifier
+      ready: true
+      restartCount: 1
+      started: true
+      state:
+        running:
+          startedAt: "2025-01-03T08:19:18Z"
+      volumeMounts:
+      - mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+        name: kube-api-access-pqpjv
+        readOnly: true
+        recursiveReadOnly: Disabled
+    hostIP: 192.168.49.2
+    hostIPs:
+    - ip: 192.168.49.2
+    phase: Running
+    podIP: 10.244.0.53
+    podIPs:
+    - ip: 10.244.0.53
+    qosClass: BestEffort
+    startTime: "2025-01-03T08:16:39Z"
+- apiVersion: v1
+  kind: Service
+  metadata:
+    creationTimestamp: "2025-01-01T21:04:15Z"
+    labels:
+      component: apiserver
+      provider: kubernetes
+    name: kubernetes
+    namespace: default
+    resourceVersion: "233"
+    uid: 4d78d78d-5484-4b5b-8c17-9dd88f6bc0ac
+  spec:
+    clusterIP: 10.96.0.1
+    clusterIPs:
+    - 10.96.0.1
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - name: https
+      port: 443
+      protocol: TCP
+      targetPort: 8443
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: v1
+  kind: Service
+  metadata:
+    annotations:
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{},"name":"resnet50-1k-classifier-service","namespace":"default"},"spec":{"ports":[{"port":80,"protocol":"TCP","targetPort":7860}],"selector":{"app":"resnet50-1k-classifier"}}}
+    creationTimestamp: "2025-01-03T08:16:39Z"
+    name: resnet50-1k-classifier-service
+    namespace: default
+    resourceVersion: "33354"
+    uid: 17fcf333-905a-45b3-91a0-6965a2153924
+  spec:
+    clusterIP: 10.106.157.161
+    clusterIPs:
+    - 10.106.157.161
+    internalTrafficPolicy: Cluster
+    ipFamilies:
+    - IPv4
+    ipFamilyPolicy: SingleStack
+    ports:
+    - port: 80
+      protocol: TCP
+      targetPort: 7860
+    selector:
+      app: resnet50-1k-classifier
+    sessionAffinity: None
+    type: ClusterIP
+  status:
+    loadBalancer: {}
+- apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    annotations:
+      deployment.kubernetes.io/revision: "1"
+      kubectl.kubernetes.io/last-applied-configuration: |
+        {"apiVersion":"apps/v1","kind":"Deployment","metadata":{"annotations":{},"labels":{"app":"resnet50-1k-classifier"},"name":"resnet50-1k-classifier-deployment","namespace":"default"},"spec":{"replicas":2,"selector":{"matchLabels":{"app":"resnet50-1k-classifier"}},"template":{"metadata":{"labels":{"app":"resnet50-1k-classifier"}},"spec":{"containers":[{"image":"resnet-k8s:latest","imagePullPolicy":"Never","name":"resnet50-1k-classifier","ports":[{"containerPort":7860}]}]}}}}
+    creationTimestamp: "2025-01-03T08:16:39Z"
+    generation: 1
+    labels:
+      app: resnet50-1k-classifier
+    name: resnet50-1k-classifier-deployment
+    namespace: default
+    resourceVersion: "33390"
+    uid: ff5dbc63-dc93-4807-b873-51071b2743b2
+  spec:
+    progressDeadlineSeconds: 600
+    replicas: 2
+    revisionHistoryLimit: 10
+    selector:
+      matchLabels:
+        app: resnet50-1k-classifier
+    strategy:
+      rollingUpdate:
+        maxSurge: 25%
+        maxUnavailable: 25%
+      type: RollingUpdate
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: resnet50-1k-classifier
+      spec:
+        containers:
+        - image: resnet-k8s:latest
+          imagePullPolicy: Never
+          name: resnet50-1k-classifier
+          ports:
+          - containerPort: 7860
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 2
+    conditions:
+    - lastTransitionTime: "2025-01-03T08:16:41Z"
+      lastUpdateTime: "2025-01-03T08:16:41Z"
+      message: Deployment has minimum availability.
+      reason: MinimumReplicasAvailable
+      status: "True"
+      type: Available
+    - lastTransitionTime: "2025-01-03T08:16:39Z"
+      lastUpdateTime: "2025-01-03T08:16:41Z"
+      message: ReplicaSet "resnet50-1k-classifier-deployment-5cd5cf566c" has successfully
+        progressed.
+      reason: NewReplicaSetAvailable
+      status: "True"
+      type: Progressing
+    observedGeneration: 1
+    readyReplicas: 2
+    replicas: 2
+    updatedReplicas: 2
+- apiVersion: apps/v1
+  kind: ReplicaSet
+  metadata:
+    annotations:
+      deployment.kubernetes.io/desired-replicas: "2"
+      deployment.kubernetes.io/max-replicas: "3"
+      deployment.kubernetes.io/revision: "1"
+    creationTimestamp: "2025-01-03T08:16:39Z"
+    generation: 1
+    labels:
+      app: resnet50-1k-classifier
+      pod-template-hash: 5cd5cf566c
+    name: resnet50-1k-classifier-deployment-5cd5cf566c
+    namespace: default
+    ownerReferences:
+    - apiVersion: apps/v1
+      blockOwnerDeletion: true
+      controller: true
+      kind: Deployment
+      name: resnet50-1k-classifier-deployment
+      uid: ff5dbc63-dc93-4807-b873-51071b2743b2
+    resourceVersion: "33388"
+    uid: 364080a5-d479-4ae8-aff7-7abf8d5fbf5e
+  spec:
+    replicas: 2
+    selector:
+      matchLabels:
+        app: resnet50-1k-classifier
+        pod-template-hash: 5cd5cf566c
+    template:
+      metadata:
+        creationTimestamp: null
+        labels:
+          app: resnet50-1k-classifier
+          pod-template-hash: 5cd5cf566c
+      spec:
+        containers:
+        - image: resnet-k8s:latest
+          imagePullPolicy: Never
+          name: resnet50-1k-classifier
+          ports:
+          - containerPort: 7860
+            protocol: TCP
+          resources: {}
+          terminationMessagePath: /dev/termination-log
+          terminationMessagePolicy: File
+        dnsPolicy: ClusterFirst
+        restartPolicy: Always
+        schedulerName: default-scheduler
+        securityContext: {}
+        terminationGracePeriodSeconds: 30
+  status:
+    availableReplicas: 2
+    fullyLabeledReplicas: 2
+    observedGeneration: 1
+    readyReplicas: 2
+    replicas: 2
+kind: List
+metadata:
+  resourceVersion: ""
