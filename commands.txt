@@ -20,5 +20,76 @@ kubectl top pod
 kubectl top node
 
 
-docker build -t resnet50-k8s .
-docker run -it -p 8000:8000 resnet-k8s
+
+docker run -it -p 7860:7860 resnet-k8s
+
+eval $(minikube docker-env) 
+docker build -t resnet-k8s .
+
+kubectl apply -f resnet50-classifier-deployment.yaml
+
+kubectl get pods
+kubectl get services
+kubectl get ingress
+
+
+❯ kubectl get pods
+NAME                                                 READY   STATUS              RESTARTS   AGE
+resnet50-1k-classifier-deployment-5cd5cf566c-6hwk7   0/1     ErrImageNeverPull   0          6s
+resnet50-1k-classifier-deployment-5cd5cf566c-d6jcb   0/1     ErrImageNeverPull   0          6s
+
+❯ kubectl get services
+NAME                             TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
+kubernetes                       ClusterIP   10.96.0.1        <none>        443/TCP   31h
+resnet50-1k-classifier-service   ClusterIP   10.106.229.129   <none>        80/TCP    25s
+
+❯ kubectl get pods
+NAME                                                 READY   STATUS    RESTARTS   AGE
+resnet50-1k-classifier-deployment-5cd5cf566c-j7dmb   1/1     Running   0          6s
+resnet50-1k-classifier-deployment-5cd5cf566c-src8f   1/1     Running   0          6s
+
+#Expose the Service using MiniKube Service Proxy
+
+minikube service resnet50-1k-classifier-service
+
+#Expose the Service using MiniKube Service Proxy
+
+minikube service resnet50-1k-classifier-service
+
+❯ minikube service resnet50-1k-classifier-service
+|-----------|--------------------------------|-------------|--------------|
+| NAMESPACE |              NAME              | TARGET PORT |     URL      |
+|-----------|--------------------------------|-------------|--------------|
+| default   | resnet50-1k-classifier-service |             | No node port |
+|-----------|--------------------------------|-------------|--------------|
+😿  service default/resnet50-1k-classifier-service has no node port
+❗  Services [default/resnet50-1k-classifier-service] have type "ClusterIP" not meant to be exposed, however for local development minikube allows you to access this !
+🏃  Starting tunnel for service resnet50-1k-classifier-service.
+|-----------|--------------------------------|-------------|------------------------|
+| NAMESPACE |              NAME              | TARGET PORT |          URL           |
+|-----------|--------------------------------|-------------|------------------------|
+| default   | resnet50-1k-classifier-service |             | http://127.0.0.1:55872 |
+|-----------|--------------------------------|-------------|------------------------|
+🎉  Opening service default/resnet50-1k-classifier-service in default browser...
+❗  Because you are using a Docker driver on darwin, the terminal needs to be open to run it.
+
+
+
+Let me explain what `minikube service resnet50-1k-classifier-service` does in relation to your deployment configuration.
+
+Based on your YAML file, you have:
+1. A Deployment that runs your ResNet50 classifier containers on port 7860
+2. A Service of type `ClusterIP` (default) that:
+   - Targets pods with label `app: resnet50-1k-classifier`
+   - Maps port 80 (service port) to port 7860 (container port)
+
+When you run `minikube service resnet50-1k-classifier-service`, Minikube will:
+
+1. Detect that your service is of type `ClusterIP` (which is normally only accessible within the cluster)
+2. Create a tunnel between your local machine and the Kubernetes cluster
+3. Automatically assign a random local port (in your case, 55872) that forwards to your service's port 80
+4. Open your default browser pointing to `http://127.0.0.1:55872`
+
+To make this service exposure more explicit, you could modify your Service configuration to use `NodePort` or `LoadBalancer` type. Here's how you could modify your YAML:
+
+With this change, Kubernetes would automatically assign a node port (in the range 30000-32767) to your service, making it more explicitly exposed to external traffic.

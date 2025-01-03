@@ -17,7 +17,7 @@ spec:
             containers:
                 - name: food-classifier
                   image: food-classifier-k8s:latest
-                  imagePullPolicy: Never
+                  imagePullPolicy: IfNotPresent
                   ports:
                       - containerPort: 7860
 

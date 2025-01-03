@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+    name: resnet50-1k-classifier-deployment
+    labels:
+        app: resnet50-1k-classifier
+spec:
+    replicas: 2
+    selector:
+        matchLabels:
+            app: resnet50-1k-classifier
+    template:
+        metadata:
+            labels:
+                app: resnet50-1k-classifier
+        spec:
+            containers:
+                - name: resnet50-1k-classifier
+                  image: resnet-k8s:latest
+                  imagePullPolicy: Never
+                  ports:
+                      - containerPort: 7860
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+    name: resnet50-1k-classifier-service
+spec:
+    selector:
+        app: resnet50-1k-classifier
+    ports:
+        - protocol: TCP
+          port: 80
+          targetPort: 7860
+
