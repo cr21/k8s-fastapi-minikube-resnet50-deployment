@@ -18,3 +18,7 @@ kubectl describe pods food-classifier
 kubectl describe ingress food-classifier
 kubectl top pod
 kubectl top node
+
+
+docker build -t resnet50-k8s .
+docker run -it -p 8000:8000 resnet-k8s
