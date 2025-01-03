@@ -35,8 +35,8 @@ kubectl get ingress
 
 ❯ kubectl get pods
 NAME                                                 READY   STATUS              RESTARTS   AGE
-resnet50-1k-classifier-deployment-5cd5cf566c-6hwk7   0/1     ErrImageNeverPull   0          6s
-resnet50-1k-classifier-deployment-5cd5cf566c-d6jcb   0/1     ErrImageNeverPull   0          6s
+resnet50-1k-classifier-deployment-5cd5cf566c-j7dmb    0/1     READY   0          6s
+resnet50-1k-classifier-deployment-5cd5cf566c-src8f   0/1     READY   0          6s
 
 ❯ kubectl get services
 NAME                             TYPE        CLUSTER-IP       EXTERNAL-IP   PORT(S)   AGE
@@ -93,3 +93,11 @@ When you run `minikube service resnet50-1k-classifier-service`, Minikube will:
 To make this service exposure more explicit, you could modify your Service configuration to use `NodePort` or `LoadBalancer` type. Here's how you could modify your YAML:
 
 With this change, Kubernetes would automatically assign a node port (in the range 30000-32767) to your service, making it more explicitly exposed to external traffic.
+
+
+
+# Delete Deployment and Service
+kubectl delete -f resnet50-classifier-deployment.yaml
+
+kubectl delete service resnet50-1k-classifier-service
+
