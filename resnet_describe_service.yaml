@@ -1,0 +1,16 @@
+Name:                     resnet50-1k-classifier-service
+Namespace:                default
+Labels:                   <none>
+Annotations:              <none>
+Selector:                 app=resnet50-1k-classifier
+Type:                     ClusterIP
+IP Family Policy:         SingleStack
+IP Families:              IPv4
+IP:                       10.106.157.161
+IPs:                      10.106.157.161
+Port:                     <unset>  80/TCP
+TargetPort:               7860/TCP
+Endpoints:                10.244.0.56:7860,10.244.0.53:7860
+Session Affinity:         None
+Internal Traffic Policy:  Cluster
+Events:                   <none>
